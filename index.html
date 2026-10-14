@@ -2,16 +2,31 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#173c64"><title>金好汽車美容</title>
+<meta name="theme-color" content="#173c64"><title>金好汽車美容店 2.0</title>
 <style>
 :root{--navy:#173c64;--blue:#2867a8;--bg:#f3f6fa;--ink:#1d2939;--muted:#667085;--line:#e3e8ef;--green:#16845b;--red:#b93838}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:88px}header{background:var(--navy);color:white;padding:17px 16px;position:sticky;top:0;z-index:2}header h1{font-size:20px;margin:0 0 4px}header p{font-size:12px;margin:0;color:#dce8f5}main{max-width:850px;margin:auto;padding:13px}.tabs{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);display:flex;overflow-x:auto;z-index:5;padding-bottom:env(safe-area-inset-bottom)}.tabs button{background:white;color:var(--muted);border-radius:0;min-width:72px;flex:1;padding:8px 4px;font-size:11px}.tabs button b{display:block;font-size:18px;margin-bottom:3px}.tabs button.active{color:var(--blue);background:#edf4fc}.panel{display:none}.panel.active{display:block}.title{font-size:19px;margin:8px 0 13px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric,.card,.item,form{background:white;border:1px solid var(--line);border-radius:13px;padding:13px;margin-bottom:10px}.metric small{color:var(--muted);font-size:12px}.metric strong{display:block;font-size:22px;margin-top:7px;overflow-wrap:anywhere}.sub{color:var(--muted);font-size:12px;line-height:1.5}.green{color:var(--green)}.red{color:var(--red)}h3{font-size:15px;margin:0 0 9px}label{display:block;font-size:12px;color:#475467;margin:10px 0 5px}input,select,textarea{width:100%;font:inherit;font-size:16px;padding:10px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:var(--ink)}textarea{min-height:60px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 9px}button{border:0;border-radius:9px;background:var(--blue);color:white;padding:10px 12px;font-size:14px;font-weight:600;cursor:pointer}.secondary{background:#e8eef6;color:var(--navy)}.danger{background:#fff0f0;color:var(--red)}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.full{width:100%}.item{padding:12px}.itemtop{display:flex;justify-content:space-between;gap:8px}.item h4{font-size:14px;margin:0 0 5px}.item p{font-size:12px;color:var(--muted);margin:4px 0;overflow-wrap:anywhere}.pill{display:inline-block;border-radius:20px;padding:3px 7px;font-size:11px;background:#e9eff7;color:var(--navy)}.empty{background:white;border:1px dashed #cbd5e1;border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:13px}.note{background:#fff8e6;border:1px solid #f0d89a;color:#765b13;padding:10px;border-radius:9px;font-size:12px;line-height:1.5;margin:10px 0}.hidden{display:none!important}.footer{font-size:11px;color:var(--muted);text-align:center;margin:18px 0}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:600}.service-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 10px}.service-check{display:flex;align-items:center;gap:8px;padding:7px 0;margin:0;font-size:13px}.service-check input{width:18px;height:18px;flex:0 0 auto}.multi-select{min-height:130px}.multi-help{margin-top:5px}
 @media(min-width:600px){.tabs{left:calc(50% - 425px);right:calc(50% - 425px);border-radius:12px 12px 0 0;border:1px solid var(--line)}}
+
+#authGate{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:18px}#authGate .auth-card{width:min(100%,420px);background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 10px 30px #173c6418}#authGate h2{margin:0 0 8px;font-size:21px}#authGate .sub{margin-bottom:14px}#authMessage{margin-top:10px;white-space:pre-wrap}#cloudBar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border-radius:9px;background:#e8f4ed;color:#176345;font-size:12px}#cloudBar button{padding:6px 9px;font-size:12px}body.signed-out main,body.signed-out nav.tabs{display:none}
 </style></head>
-<body>
-<header><h1>🚗 金好汽車美容</h1><p>店務管理｜新台幣 TWD｜本機儲存</p></header>
+<body class="signed-out">
+<header><h1>🚗 金好汽車美容</h1><p>店務管理｜新台幣 TWD｜Firebase 雲端共用</p></header>
+<div id="authGate">
+  <div class="auth-card">
+    <h2>🚗 金好汽車美容店 2.0</h2>
+    <p class="sub">請使用已由管理者建立的 Firebase 帳號登入。此頁不提供公開註冊。</p>
+    <form id="loginForm">
+      <label>電子郵件</label><input id="loginEmail" type="email" autocomplete="username" required>
+      <label>密碼</label><input id="loginPassword" type="password" autocomplete="current-password" required>
+      <div class="actions"><button class="full" id="loginButton">登入雲端店務</button></div>
+    </form>
+    <p id="authMessage" class="sub" role="status">正在初始化登入服務…</p>
+  </div>
+</div>
 <main>
-<section id="home" class="panel active"><h2 class="title">今日概況</h2><div class="cards"><div class="metric"><small>今日營收</small><strong id="todayIn">$0</strong></div><div class="metric"><small>今日支出</small><strong id="todayOut">$0</strong></div><div class="metric"><small>今日收支差額</small><strong id="todayNet">$0</strong></div><div class="metric"><small>今日預約</small><strong id="todayAppt">0 筆</strong></div></div><div class="card"><h3>快速新增</h3><div class="actions"><button onclick="showTab('appointments')">＋ 預約</button><button onclick="showTab('income')">＋ 營收</button><button onclick="showTab('expenses')">＋ 支出</button><button class="secondary" onclick="showTab('customers')">＋ 客戶</button></div></div><div class="card"><h3>本月概況</h3><p>本月營收：<b id="monthIn">$0</b></p><p>本月支出：<b id="monthOut">$0</b></p><p>本月收支差額：<b id="monthNet">$0</b></p><p class="sub">收支差額＝已登記收入－已登記支出。</p></div><div class="note">資料儲存在此瀏覽器本機。請定期到「報表／備份」匯出 JSON；清除網站資料或更換裝置可能導致資料遺失。</div></section>
+<div id="cloudBar"><span id="cloudStatus">尚未連線</span><button class="secondary" type="button" onclick="firebaseSignOut()">登出</button></div>
+<section id="home" class="panel active"><h2 class="title">今日概況</h2><div class="cards"><div class="metric"><small>今日營收</small><strong id="todayIn">$0</strong></div><div class="metric"><small>今日支出</small><strong id="todayOut">$0</strong></div><div class="metric"><small>今日收支差額</small><strong id="todayNet">$0</strong></div><div class="metric"><small>今日預約</small><strong id="todayAppt">0 筆</strong></div></div><div class="card"><h3>快速新增</h3><div class="actions"><button onclick="showTab('appointments')">＋ 預約</button><button onclick="showTab('income')">＋ 營收</button><button onclick="showTab('expenses')">＋ 支出</button><button class="secondary" onclick="showTab('customers')">＋ 客戶</button></div></div><div class="card"><h3>本月概況</h3><p>本月營收：<b id="monthIn">$0</b></p><p>本月支出：<b id="monthOut">$0</b></p><p>本月收支差額：<b id="monthNet">$0</b></p><p class="sub">收支差額＝已登記收入－已登記支出。</p></div><div class="note">雲端共用版：登入後資料會儲存在 Firebase，並同步至已授權裝置。首次登入時不會自動匯入舊本機資料；舊資料會先保留在本機備份，請在確認雲端運作正常後再安排匯入。仍建議定期匯出 JSON 備份。</div></section>
 <section id="customers" class="panel"><h2 class="title">客戶管理</h2><div id="customerListView"><div class="actions"><button type="button" onclick="newCustomer()">＋ 新增客戶</button></div><div class="grid"><div><label>搜尋客戶</label><input id="cSearch" placeholder="搜尋姓名、電話或車牌" oninput="renderCustomers()"></div><div><label>排序方式</label><select id="cSort" onchange="renderCustomers()"><option value="name">客戶姓名（筆畫由少到多）</option><option value="recent">最近新增客戶</option><option value="spend">最近消費</option><option value="phone">電話</option><option value="plate">車牌</option></select></div></div><div id="customerList"></div></div><div id="customerEditor" class="hidden"><form id="customerForm"><h3 id="customerFormTitle">新增客戶</h3><input type="hidden" id="cId"><label>姓名 *</label><input id="cName" required placeholder="客戶姓名"><label>電話（選填）</label><input id="cPhone" type="tel" placeholder="電話號碼"><label>車輛（選填）</label><div id="customerVehicles"></div><div class="actions"><button type="button" class="secondary" onclick="addVehicleRow()">＋ 新增車輛</button></div><label>備註</label><textarea id="cNote"></textarea><div class="actions"><button>儲存客戶</button><button type="button" class="secondary" onclick="cancelCustomerEdit()">取消</button></div></form></div><div id="customerDetail" class="hidden"></div></section>
 <section id="appointments" class="panel"><h2 class="title">預約管理</h2>
 <form id="apptForm"><h3>新增／編輯預約</h3><input type="hidden" id="aId"><div class="grid"><div><label>日期 *</label><input id="aDate" type="date" required></div><div><label>時間 *</label><input id="aTime" type="time" required></div></div><label>搜尋並選擇客戶 *</label><input id="aCustomerSearch" placeholder="輸入姓名、電話或車牌搜尋…" autocomplete="off" oninput="renderAppointmentCustomerResults()"><div id="aCustomerResults"></div><input type="hidden" id="aCustomer" required><div id="aSelectedCustomer" class="sub"></div><label>選擇預約車輛</label><select id="aVehicle"><option value="">請先選擇客戶</option></select><label>服務項目（可複選）*</label><div id="aServiceChecks" class="service-checks"></div><p class="sub multi-help">同一筆預約可選擇多種服務。</p><label>備註</label><textarea id="aNote" placeholder="記錄客戶的特殊需求…"></textarea><div class="actions"><button>儲存預約</button><button type="button" class="secondary" onclick="resetAppt()">清除</button></div></form><div class="grid"><div><label>查看日期</label><input id="aFilter" type="date" onchange="renderAppts()"></div><div><label>搜尋預約</label><input id="aListSearch" placeholder="客戶姓名、電話或車牌" oninput="renderAppts()"></div></div><div id="apptList"></div></section>
@@ -19,7 +34,7 @@
 <section id="expenses" class="panel"><h2 class="title">支出與成本</h2><form id="expenseForm"><h3>新增／編輯支出</h3><input type="hidden" id="eId"><div class="grid"><div><label>日期 *</label><input id="eDate" type="date" required></div><div><label>金額（元）*</label><input id="eAmount" type="number" min="0" step="1" required></div><div><label>支出類別</label><select id="eCategory"><option>材料採購</option><option>材料耗用成本</option><option>員工薪資</option><option>店租</option><option>水電</option><option>設備／維修</option><option>廣告</option><option>勞健保／相關費用</option><option>其他支出</option></select></div><div><label>付款方式</label><select id="ePay"><option>現金</option><option>轉帳</option><option>信用卡</option><option>其他</option></select></div></div><label>項目／材料名稱</label><input id="eItem" placeholder="例如：鍍膜劑、洗車精、店租"><label>備註</label><input id="eNote"><div class="actions"><button>儲存支出</button><button type="button" class="secondary" onclick="resetExpense()">清除</button></div></form><div id="expenseList"></div></section>
 <section id="payroll" class="panel"><h2 class="title">員工薪資</h2><form id="payForm"><h3>登記薪資支出</h3><div class="grid"><div><label>發薪日期 *</label><input id="pDate" type="date" required></div><div><label>員工姓名 *</label><input id="pName" required></div><div><label>薪資月份</label><input id="pMonth" type="month"></div><div><label>金額（元）*</label><input id="pAmount" type="number" min="0" step="1" required></div></div><label>備註</label><input id="pNote"><div class="actions"><button>儲存薪資</button></div></form><div id="payList"></div><p class="sub">薪資付款紀錄不會自動計算加班費、勞健保或扣繳申報。</p></section>
 <section id="reports" class="panel"><h2 class="title">月報表與備份</h2><div class="card"><h3>月報表與利潤分析</h3><div class="grid"><div><label>選擇月份</label><input id="rMonth" type="month"></div><div><label>比較月份</label><input id="rCompare" type="month"></div></div><div class="actions"><button onclick="renderReport()">計算月報表</button></div><div id="reportResult"></div></div><div class="card"><h3>指定期間報表</h3><div class="grid"><div><label>開始日期</label><input id="rStart" type="date"></div><div><label>結束日期</label><input id="rEnd" type="date"></div></div><div class="actions"><button class="secondary" onclick="renderRangeReport()">計算期間報表</button></div><div id="rangeResult"></div></div><div class="card"><h3>資料備份與還原</h3><p class="sub">匯出 JSON 可完整備份所有資料；CSV 可用試算表查看收支。建議定期備份。</p><div class="actions"><button onclick="backupJSON()">匯出完整備份</button><button class="secondary" onclick="exportCSV()">匯出收支 CSV</button></div><label>選擇之前匯出的 JSON 備份</label><input id="restoreFile" type="file" accept=".json,application/json"><div class="actions"><button class="secondary" onclick="restoreJSON()">還原備份</button><button class="danger" onclick="clearAll()">清空全部資料</button></div><p class="sub">還原會覆蓋目前資料；清空資料無法復原。</p></div></section>
-<div class="footer">金好汽車美容店 · 本機版 2.0</div></main>
+<div class="footer">金好汽車美容店 · Firebase 雲端共用版 2.0</div></main>
 <nav class="tabs"><button class="active" data-tab="home" onclick="showTab('home')"><b>⌂</b>首頁</button><button data-tab="customers" onclick="showTab('customers')"><b>♙</b>客戶</button><button data-tab="appointments" onclick="showTab('appointments')"><b>▦</b>預約</button><button data-tab="income" onclick="showTab('income')"><b>＋</b>營收</button><button data-tab="expenses" onclick="showTab('expenses')"><b>－</b>支出</button><button data-tab="payroll" onclick="showTab('payroll')"><b>＄</b>薪資</button><button data-tab="reports" onclick="showTab('reports')"><b>▥</b>月報</button></nav>
 <script>
 const KEY='carBeautyShopLocalV1';
@@ -29,7 +44,7 @@ const APPOINTMENT_SERVICES=[...SERVICE_PRESETS];
 const blank=()=>({customers:[],appointments:[],incomes:[],expenses:[],payroll:[],materials:[],stockMoves:[],services:[...DEFAULT_SERVICES]});
 let db=loadDB();
 function loadDB(){try{const saved=JSON.parse(localStorage.getItem(KEY)||'{}');const data=Object.assign(blank(),saved);if(!Array.isArray(data.services))data.services=[...DEFAULT_SERVICES];const historical=[...data.appointments.map(x=>x.service),...data.incomes.map(x=>x.category),...data.appointments.flatMap(x=>Array.isArray(x.services)?x.services:[]),...data.incomes.flatMap(x=>Array.isArray(x.services)?x.services:[])];data.services=[...new Set([...data.services,...historical.flatMap(v=>String(v||'').split('、').map(s=>s.trim()).filter(Boolean))])];data.customers=data.customers.map(c=>({...c,vehicles:Array.isArray(c.vehicles)&&c.vehicles.length?c.vehicles.filter(v=>v&&((v.plate||'').trim()||(v.car||v.model||'').trim())).map(v=>({id:v.id||id(),plate:(v.plate||'').toUpperCase(),model:v.model||v.car||''})):((c.plate||c.car)?[{id:id(),plate:(c.plate||'').toUpperCase(),model:c.car||''}]:[])}));return data}catch(e){return blank()}}
-function save(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function save(){localStorage.setItem(KEY,JSON.stringify(db));renderAll();if(window.firebaseCloudSave&&window.firebaseCloudReady)window.firebaseCloudSave(db)}
 function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function val(x){return document.getElementById(x).value}
 function setv(x,v=''){document.getElementById(x).value=v??''}
@@ -110,5 +125,131 @@ function download(name,data,type){let blob=new Blob([data],{type}),url=URL.creat
 function restoreJSON(){let f=document.getElementById('restoreFile').files[0];if(!f){alert('請先選擇 JSON 備份檔');return}let r=new FileReader();r.onload=()=>{try{let o=JSON.parse(r.result),d=o.data||o;if(!Array.isArray(d.customers)||!Array.isArray(d.incomes))throw Error();if(!confirm('還原會覆蓋目前全部資料，確定繼續？建議先匯出現有備份。'))return;db=Object.assign(blank(),d);if(!Array.isArray(db.services))db.services=[...DEFAULT_SERVICES];const historical=[...db.appointments.map(x=>x.service),...db.incomes.map(x=>x.category),...db.appointments.flatMap(x=>Array.isArray(x.services)?x.services:[]),...db.incomes.flatMap(x=>Array.isArray(x.services)?x.services:[])];db.services=[...new Set([...db.services,...historical.flatMap(v=>String(v||'').split('、').map(s=>s.trim()).filter(Boolean))])];save();renderReport();alert('還原完成')}catch(e){alert('檔案格式不正確，無法還原')}};r.readAsText(f)}
 function clearAll(){if(!confirm('確定清空所有客戶、預約、營收、支出、薪資？此操作無法復原。'))return;if(!confirm('再次確認：確定清空全部資料嗎？'))return;db=blank();save()}
 function renderAll(){renderServiceOptions();renderAppointmentServices(Array.from(document.querySelectorAll('.appt-service:checked')).map(x=>x.value));renderDashboard();renderCustomers();renderAppts();renderIncome();renderExpenses();renderPayroll()}
+window.applyFirebaseCloudData=function(remoteData){if(remoteData&&typeof remoteData==='object'){db=Object.assign(blank(),remoteData)}else{db=blank()}if(!Array.isArray(db.services))db.services=[...DEFAULT_SERVICES];if(!Array.isArray(db.customers))db.customers=[];if(!Array.isArray(db.appointments))db.appointments=[];if(!Array.isArray(db.incomes))db.incomes=[];if(!Array.isArray(db.expenses))db.expenses=[];if(!Array.isArray(db.payroll))db.payroll=[];renderAll();renderReport();if(document.getElementById('rangeResult'))document.getElementById('rangeResult').innerHTML=''}
 setv('aDate',today());setv('aTime','09:00');setv('iDate',today());setv('eDate',today());setv('pDate',today());setv('pMonth',monthNow());setv('aFilter',today());setv('rMonth',monthNow());setv('rStart',monthNow()+'-01');setv('rEnd',today());renderAll();renderReport();
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD_GM61Ft9zAxH3SuvA37MkfZ67LKF1U5U",
+  authDomain: "car-beauty-shop.firebaseapp.com",
+  databaseURL: "https://car-beauty-shop-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "car-beauty-shop",
+  storageBucket: "car-beauty-shop.firebasestorage.app",
+  messagingSenderId: "597907064998",
+  appId: "1:597907064998:web:7656a8c2cf08683437cc67"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+const authGate = document.getElementById('authGate');
+const authMessage = document.getElementById('authMessage');
+const loginButton = document.getElementById('loginButton');
+const cloudStatus = document.getElementById('cloudStatus');
+let stopCloudListener = null;
+let currentUid = null;
+let writeInProgress = Promise.resolve();
+let cloudLoaded = false;
+
+function setMessage(message, isError=false) {
+  authMessage.textContent = message;
+  authMessage.style.color = isError ? '#b93838' : '';
+}
+function preserveLocalData() {
+  try {
+    const local = localStorage.getItem('carBeautyShopLocalV1');
+    const backupKey = 'carBeautyShopLocalV1_preCloudBackup';
+    if (local && !localStorage.getItem(backupKey)) localStorage.setItem(backupKey, local);
+  } catch (e) { console.warn('Local backup copy could not be made', e); }
+}
+function showSignedIn(user) {
+  authGate.classList.add('hidden');
+  cloudStatus.textContent = `已登入：${user.email || '授權帳號'}｜雲端同步中`;
+}
+function showSignedOut() {
+  authGate.classList.remove('hidden');
+  document.body.classList.add('signed-out');
+  cloudStatus.textContent = '尚未登入';
+  window.firebaseCloudReady = false;
+  cloudLoaded = false;
+  currentUid = null;
+  if (stopCloudListener) { stopCloudListener(); stopCloudListener = null; }
+}
+
+document.body.classList.add('signed-out');
+document.getElementById('loginForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  loginButton.disabled = true;
+  setMessage('正在登入…');
+  try {
+    await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value.trim(), document.getElementById('loginPassword').value);
+    document.getElementById('loginPassword').value = '';
+    setMessage('登入成功，正在載入雲端資料…');
+  } catch (error) {
+    console.error(error);
+    setMessage('登入失敗：請確認電子郵件、密碼與 Firebase Authentication 帳號設定。', true);
+  } finally { loginButton.disabled = false; }
+});
+window.firebaseSignOut = async () => {
+  if (!confirm('確定要登出嗎？')) return;
+  await signOut(auth);
+};
+window.firebaseCloudSave = (data) => {
+  if (!auth.currentUser || !cloudLoaded || !window.firebaseCloudReady) return;
+  const uid = auth.currentUser.uid;
+  const snapshot = JSON.parse(JSON.stringify(data));
+  writeInProgress = writeInProgress.then(() => {
+    if (!auth.currentUser || auth.currentUser.uid !== uid) return;
+    return set(ref(database, 'sharedData'), snapshot);
+  }).catch(error => {
+    console.error('Cloud save failed', error);
+    cloudStatus.textContent = '雲端儲存失敗，請確認網路與資料庫規則';
+    alert('雲端儲存失敗。請不要關閉頁面，確認網路與 Firebase Rules 後再試。');
+  });
+};
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { showSignedOut(); setMessage('請使用已建立的帳號登入。'); return; }
+  if (stopCloudListener) { stopCloudListener(); stopCloudListener = null; }
+  currentUid = user.uid;
+  preserveLocalData();
+  showSignedIn(user);
+  setMessage('正在讀取共用資料庫…');
+  window.firebaseCloudReady = false;
+  cloudLoaded = false;
+  try {
+    const dataRef = ref(database, 'sharedData');
+    const snapshot = await get(dataRef);
+    if (!auth.currentUser || auth.currentUser.uid !== currentUid) return;
+    if (snapshot.exists()) {
+      window.applyFirebaseCloudData(snapshot.val());
+      setMessage('雲端資料載入完成。');
+    } else {
+      // Keep the existing local copy separately; do not migrate or upload it automatically.
+      window.applyFirebaseCloudData(null);
+      setMessage('雲端資料庫目前是空的。舊資料已另外保留在本機備份，尚未匯入雲端。');
+    }
+    cloudLoaded = true;
+    window.firebaseCloudReady = true;
+    document.body.classList.remove('signed-out');
+    stopCloudListener = onValue(dataRef, (liveSnapshot) => {
+      if (!auth.currentUser || auth.currentUser.uid !== currentUid || !cloudLoaded) return;
+      if (liveSnapshot.exists()) window.applyFirebaseCloudData(liveSnapshot.val());
+      else window.applyFirebaseCloudData(null);
+      cloudStatus.textContent = `已登入：${user.email || '授權帳號'}｜雲端同步正常`;
+    }, (error) => {
+      console.error(error);
+      cloudStatus.textContent = '雲端讀取失敗，請檢查資料庫規則';
+    });
+  } catch (error) {
+    console.error(error);
+    authGate.classList.remove('hidden');
+    document.body.classList.add('signed-out');
+    setMessage('無法讀取雲端資料。請確認 Realtime Database Rules 已發布，且兩個 UID 完全正確。', true);
+    cloudStatus.textContent = '雲端連線失敗';
+  }
+});
 </script></body></html>
